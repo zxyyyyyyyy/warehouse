@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,12 +15,17 @@
             height: 291px;
             margin: 100px auto;
             position: relative;
+            overflow: hidden;
+        }
+        #img-box{
+            width: 3750px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: left 1s ease;
         }
         #img-box img{
-            display: none;
-        }
-        #img-box .selected{
-            display: block;
+            float: left;
         }
         #btn-box{
             list-style: none;
@@ -28,110 +34,89 @@
             bottom: 10px;
         }
         #btn-box li{
-            float: left;
             width: 20px;
             height: 20px;
-            background: rgba(0, 0, 0,0.4);
-            color: #fff;
-            border-radius: 5px;
+            float: left;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius:5px;
             text-align: center;
             line-height: 20px;
+            color: #ffffff;
             margin-right: 5px;
             cursor: pointer;
         }
         #btn-box .active{
-            background: #ff0056;
+            background: #ff0036;
         }
         #prev,#next{
             width: 20px;
             height: 20px;
-            background:rgba(0, 0, 0,0.4);
-            position: absolute;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius:5px;
             bottom: 5px;
             text-align: center;
             line-height: 20px;
             color: #ffffff;
-            border-radius:5px;
             cursor: pointer;
+            position: absolute;
         }
         #prev{
             left: 5px;
-        
         }
-
-
-
         #next{
             left: 30px;
         }
-       
-
     </style>
 </head>
 <body>
     <div id="container">
         <div id="img-box">
-            <img class="selected"src="./img/1.jpg">
-            <img src="./img/2.jpg" >
-            <img src="./img/3.jpg" >
-            <img src="./img/4.jpg" >
-            <img src="./img/5.jpg" >
+            <img src="img/1.jpg" alt="">
+            <img src="img/2.jpg" alt="">
+            <img src="img/3.jpg" alt="">
+            <img src="img/4.jpg" alt="">
+            <img src="img/5.jpg" alt="">
         </div>
-     <ul id="btn-box">
-      <li class="active">1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-    </ul>  
-    <span id="prev">&lt</span>
-    <span id="next">&gt</span>
+        <ul id="btn-box">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <span id="prev">&lt;</span>
+        <span id="next">&gt;</span>
     </div>
     <script>
-        var oContainer=document.getElementById('container');  
-        var aLi = document.getElementsByTagName('Li');
-        var aImg = document.getElementsByTagName('img');
-        var oNext = document.getElementById('next');
-        var oPrev=document.getElementById('prev');
-        var iNow = 0;
-        for(var i=0; i<aLi.length;i++){
-            aLi[i].idx=i;
+        var aLi=document.getElementsByTagName('li');
+        var oImgBox=document.getElementById('img-box');
+        var oNext=document.getElementById('next');
+        var iNow=0;
+        for(var i=0;i<aLi.length;i++){
+            aLi[i].index=i;
             aLi[i].onclick=function(){
                 // for(var j=0;j<aLi.length;j++){
                 //     aLi[j].className="";
-                //     aImg[j].className="";
                 // }
                 // this.className="active";
-                // aImg[this.idx].className="selected";
-                change(this.idx);
-                iNow=this.idx;
+                // oImgBox.style.left=-this.index *750+"px";
+                change(this.index);
+                iNow = this.index;
             }
         }
         oNext.onclick=function(){
             iNow++;
             if(iNow == aLi.length){
-                // aLi[i].className="";
-                // aImg[i].className="";
                 iNow=0;
-            }
-            // aLi[iNow].className="active";
-            // aImg[iNow].className="selected";
-            change(iNow);
-        }
-        oPrev.onclick=function(){
-            iNow--;
-            if(iNow == -1){
-                iNow=aLi.length-1;
             }
             change(iNow);
         }
         function change(num){
-            for (var i=0;i<aLi.length;i++){
-                aLi[i].className="";
-                aImg[i].className="";
+            for(var j=0;j<aLi.length;j++){
+                aLi[j].className="";
             }
             aLi[num].className="active";
-            aImg[num].className="selected";
+            oImgBox.style.left= -num *750 +"px";
         }
         run();
         oContainer.onmouseover=function(){
@@ -146,7 +131,6 @@
                 oNext.onclick();
             },1000);
         }
-        </script>
-        
+    </script>
 </body>
 </html>
