@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+        
+    }
+  
+    #small-box{
+        
+        height: 400px;
+        width: 400px;
+        float: left;
+        position: relative;
+    }
+    #big-box{
+        overflow: hidden;
+        height: 400px;
+        width: 400px;
+        float: left;
+        display: none;
+        position: relative;
+    }
+    #img{
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+    #div1{
+        height: 200px;
+        width: 200px;
+        background:rgba(255, 255, 255, 0.6);
+        display: none;
+        left: 0px;
+        top: 0px;
+        position: absolute;
+         }
+    </style>
+</head>
+<body>
+    <div id="small-box">
+        <img src="imgs/1.jpg" alt="">
+        <div id="div1"></div>
+    </div>
+    <div id="big-box">
+        <img id="img" src="imgs/2.jpg" alt="">
+    </div>
+    <script>
+    var oDiv1 = document.getElementById('div1');
+    var oSmallBox = document.getElementById('small-box');
+    var oBigBox = document.getElementById('big-box');
+    var oImg =document.getElementById('img');
+        oSmallBox.onmouseover=function(){
+            oDiv1.style.display="block";
+            oBigBox.style.display="block";
+            oSmallBox.onmousemove=function(e){
+                var x=e.clientX-oDiv1.offsetWidth/2;
+                var y=e.clientY-oDiv1.offsetHeight/2;
+                if(x<0){
+                    x=0;
+                }
+                if(y<0){
+                    y=0;
+                }
+                var xMax=oSmallBox.offsetWidth-oDiv1.offsetWidth;
+                var yMax=oSmallBox.offsetHeight-oDiv1.offsetHeight;
+                if(x>xMax){
+                    x=xMax;
+                }
+                if(y>yMax){
+                    y=yMax;
+                }
+                oDiv1.style.left=x+"px";
+                oDiv1.style.top=y+"px";
+                var xBigMax=oImg.offsetWidth-oBigBox.offsetWidth;
+                var yBigMax=oImg.offsetHeight-oBigBox.offsetHeight;
+
+                var xBili=oDiv1.offsetLeft/xMax;
+                var yBili=oDiv1.offsetTop/yMax;
+
+                oImg.style.left=-xBigMax*xBili+"px";
+                oImg.style.top=-yBigMax*yBili+"px";
+            
+            }
+        }
+    oSmallBox.onmouseout=function(){
+        oDiv1.style.display="none";
+            oBigBox.style.display="none";
+    }
+    </script>
+</body>
+</html>
