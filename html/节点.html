@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul1"> 
+       <li id="li1">1111</li>
+       <!-- dhhdhdh -->
+       <li id="li2">2222</li>
+    </ul>
+
+    <div id="div1">
+        </div>
+    <script>
+    var oLi1=document.getElementById('li1');
+    var oLi2=document.getElementById('li2');
+    var oUl1=document.getElementById('ul1')
+
+    // 下一个节点
+    function next(elem){
+        do{
+            elem=elem.nextSibling;
+        }while(elem&&elem.nodeType!=1);
+        return elem;
+    }
+    var oNext=next(oLi1);
+    oNext.style.background="pink";
+    alert(oNext);
+    
+    // 上一个节点
+    // function prev(elem){
+    //     do{
+    //         elem=elem.previousSibling;
+    //     }while(elem&&elem.nodeType!=1);
+    //     return elem;
+    // }
+    // var oPrev=prev(oLi2);
+    // oPrev.style.background="pink";
+    // alert(oPrev);
+
+    // 第一个孩子
+      function first(elem){
+        elem=elem.firstChild;
+        if(elem.nodeType!=1){
+            elem=next(elem);
+        }
+        return elem;
+      }
+    var oFirst=first(oUl1);
+    oFirst.style.background="red";
+
+
+    </script>
+</body>
+</html>
