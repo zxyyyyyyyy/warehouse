@@ -13,15 +13,27 @@
         <li>0003</li>
     </ul>
     <script>
-        var aLi = document.getElementsByTagName('li');
-        for (var i=0;i<aLi.length;i++){
-            (function(i){
-                aLi[i].onclick=function(i){
-                    console.log(i);
-                }
+    //     var aLi = document.getElementsByTagName('li');
+    //     for (var i=0;i<aLi.length;i++){
+    //         (function(i){
+    //             aLi[i].onclick=function(){
+    //                 console.log(i);
+    //             }
 
-    })(i);
-        }
+    // })(i);
+    //     }
+
+    function a(){
+          var x=10;
+          return function (){
+              x++;
+              console.log(x);
+          }
+          
+    }
+    var b=a();
+    b();
+    b();
     
     </script>
 </body>
