@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    /* .red{
+        background: #ff0036;
+    } */
+    </style>
+</head>
+<body>
+    <div id="div1">
+        名称
+        <input type="text" value="请输入姓名">
+        </br>
+        密码
+        <input type="text" value="请输入密码">
+        </br>
+        详细信息
+        <input type="text" value="详细信息">
+    </div>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $('input').on('focus',function(){
+        //    $(this).css('background','red');
+            if(this.value==this.defaultValue){
+                this.value = "";
+            }
+           
+        }).on('blur',function(){
+            if(this.value == ""){
+                this.value = this.defaultValue;
+            }
+            
+        });
+    </script>
+</body>
+</html>

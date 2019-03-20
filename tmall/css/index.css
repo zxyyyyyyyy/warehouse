@@ -48,5 +48,6 @@
     border-color: #bbb transparent transparent transparent;
     position: absolute;
     top : 50%;
-    margin-top: -3px;
+    margin-top: -1.5px;
+    right:4px;
 }
