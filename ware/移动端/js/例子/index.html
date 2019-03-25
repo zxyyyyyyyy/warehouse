@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script src="rem.js"></script> -->
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div id="container">
+        <div class="page-1-1 ">
+            <img class="img1 moveFromTop" src="img/cover.png" alt="">
+            <img class="img2 moveFromLeft " src="img/wording_cover.png" alt="">
+            <img class="icon moveFromBottom " src="img/icon_up.png" alt="">
+        </div>
+        <div class="page-2-1 hide">
+            <img class="img1 hide moveFromMiddle" src="img/wording.png" alt="">
+            <img class="img2 hide moveFromLeft" src="img/people.png" alt="">
+            <img class="img3 hide moveFrom" src="img/circle.png" alt="">
+            <img class="img4 hide moveScale" src="img/floating_develop.png" alt="">
+            <img class="img5 hide moveScale" src="img/check_develop.png" alt="">
+            <img class="img6 hide moveScale" src="img/dot1.png" alt="">
+            <img class="icon hide moveFromBottom " src="img/icon_up.png" alt="">
+        </div>
+        <div class="page-2-2 hide">
+            <img class="img1 hide moveFz" src="img/introduction.png" alt="">
+            <img class="img2 hide moveFz" src="img/btn_develop.png" alt="">
+            <img class="img3 hide moveFz" src="img/dot2.png" alt="">
+            <img class="icon hide moveFromBottom" src="img/icon_up.png" alt="">
+        </div>
+        <div class="page-3-1 hide">
+            <img class="img1 hide moveFromMiddle" src="img/wording_design.png" alt="">
+            <img class="img2 hide moveFromMiddle" src="img/people_design.png" alt="">
+            <img class="img3 hide moveFrom" src="img/circle-design.png" alt="">
+            <img class="img4 hide moveScale" src="img/floating_design.png" alt="">
+            <img class="img5 hide moveScale" src="img/check_design.png" alt="">
+            <img class="img6 hide moveScale" src="img/dot1.png" alt="">
+            <img class="icon hide moveFromBottom " src="img/icon_up.png" alt="">
+        </div>
+        <div class="page-3-2 hide">
+            <img class="img1 hide moveFz" src="img/introduction_design.png" alt="">
+            <img class="img2 hide moveFz" src="img/btn_design.png" alt="">
+            <img class="img3 hide moveFz" src="img/dot2.png" alt="">
+            <img class="icon hide moveFromBottom" src="img/icon_up.png" alt="">
+        </div>
+        <div class="page-4-1 hide">
+            <img class="img1  moveFromMiddle" src="img/wording_production.png" alt="">
+            <img class="img2  moveFromRight" src="img/people_production.png" alt="">
+            <img class="img3  moveFrom" src="img/circle-production.png" alt="">
+            <img class="img4  moveScale" src="img/floating_production.png" alt="">
+            <img class="img5  moveScale" src="img/check_production.png" alt="">
+            <img class="img6  moveScale" src="img/pic_shadow_production.png" alt="">
+            <img class="img7  moveScale" src="img/dot1.png" alt="">
+            <img class="icon  moveFromBottom " src="img/icon_up.png" alt="">
+        </div>
+        <div class="page-4-2 hide">
+            <img class="img1 hide moveFz" src="img/introduction_production.png" alt="">
+            <img class="img2 hide moveFz" src="img/btn_production.png" alt="">
+            <img class="img3 hide moveFz" src="img/dot2.png" alt="">
+            <img class="icon hide moveFromBottom" src="img/icon_up.png" alt="">
+        </div>
+        <div class="page-5-1 hide">
+            <img class="img1 hide moveFromFz" src="img/pic_back.png" alt="">
+            <img class="img2 hide moveFr" src="img/btn_join.png" alt="">
+
+        </div>
+    </div>
+    <script src="zepto.js"></script>
+    <script src="touch.js"></script>
+    <script>
+        var iNow = 1;
+
+        $(document).on('swipeUp', function () {
+            if (iNow == 5) {
+                return iNow;
+            }
+            $('.page-' + iNow + '-1').attr("class", "page-" + iNow + '-1' + " moveToTop");
+
+            $('.page-' + (iNow + 1) + '-1').attr("class", "page-" + (iNow + 1) + '-1' + " moveFromMiddle");
+
+            setTimeout(function () {
+                $('.page-' + (iNow + 1) + '-1').children().removeClass('hide');
+                $('.page-' + iNow + '-1').children().addClass('hide');
+                iNow++;
+            }, 600);
+        })
+
+        $(document).on('swipeDown', function () {
+            if (iNow == 1) {
+                return iNow;
+            }
+            $('.page-' + iNow + '-1').attr("class", "page-" + iNow + '-1' + " moveToBottom");
+
+            $('.page-' + (iNow - 1) + '-1').attr("class", "page-" + (iNow - 1) + '-1' + " moveFromTop");
+
+            setTimeout(function () {
+                $('.page-' + (iNow - 1) + '-1').children().removeClass('hide');
+                $('.page-' + iNow + '-1').children().addClass('hide');
+                iNow--;
+            }, 600);
+        })
+        var iNo = 2;
+        $(document).on('swipeLeft', function () {
+            // if (iNo == 1) {
+            //     return iNo;
+            // }
+            $('.page-' + iNow + '-1').attr("class", "page-" + iNow + '-1' + " moveToRight");
+
+            $('.page-' + iNow + '-2').attr("class", "page-" + iNow + '-2' + " moveFromRight");
+
+            setTimeout(function () {
+                $('.page-' + iNow + '-2').children().removeClass('hide');
+                $('.page-' + iNow + '-1').children().addClass('hide');
+                iNow++;
+            }, 600);
+        })
+
+    </script>
+</body>
+
+</html>
