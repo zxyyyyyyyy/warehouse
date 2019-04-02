@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function 与函数名之间有一个星号
+        // fn返回的是指针对象 而不会执行函数内部逻辑
+        // 调用next方法函数内部逻辑开始执行，遇到yield表达式停止，返回{value: yield后的表达式结果/undefined, done: false/true}
+        // yield语句返回结果通常为undefined， 当调用next方法时传参内容会作为启动时yield语句的返回值。
+
+        
+    function * fn(){
+        console.log("开始");
+        yield request1();
+        console.log("请求1已结束，可以进行请求2");
+    }
+    let f=fn();
+    console.log (f.next() );   //{value: undefined, done: false}
+
+    function request1(){
+        setTimeout(()=>{
+            let data =100;
+        console.log("请求1成功，返回数据"+data);
+        console.log ( f.next() );  //{value: undefined, done: true}
+        },1000);
+        
+    }
+    </script>
+</body>
+</html>
