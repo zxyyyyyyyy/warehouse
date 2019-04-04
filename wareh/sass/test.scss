@@ -1,0 +1,97 @@
+@import'common';
+$color:#ff0;
+$color:#00f !default;
+$attr:width;
+$xx:xx;
+
+body{
+    // background: $color;
+    /*aaaaa*/
+    height:100px;
+    // color:$color;
+    #{$attr}:100px;
+    // background:$color url(#{$xx}.jpg) 0 0 no-repeat;
+    #div1{
+        width: 200px;
+        height:200px;
+        background: #f00;
+        padding{
+            top: 30px;
+            left: 80px;
+        }
+        a{
+            color:greenyellow;
+            &:hover{
+                color:#0dd;
+            }
+        }
+    }
+    
+}
+@mixin triangle{
+        width: 0;
+        height: 0;
+        border: 10px solid #000;
+        border-color: transparent;
+        border-top-color: #000;
+    }
+.aa{
+    @include triangle();
+}
+@mixin border($w:200px,$h:200px){
+    width: $w;
+    height: $h;
+    border: 5px solid #ccc;
+    border-radius: 10px;
+}
+.bb{
+    @include border(100px,400px);
+}
+.cc{
+    @include border();
+}
+.dd{
+    @extend .bb;
+    color: #000;
+}
+
+%gg{
+    width: 240px;
+    height: 140px;
+}
+.gg{
+    @extend %gg;
+    height: round(3.55) ; 
+    color:darken(#dd2a2a,10);
+       
+}
+@function add($a,$b){
+    @return $a + $b ;
+}
+.li{
+    width: add(100px,300);
+}
+
+$i:9;
+@if($i == 9){
+    .kk{
+        width: $i*100px;
+    }
+}
+
+@for $j from 1 to 5{
+    .item#{$j}{
+        width: 20px*$j;
+    }
+}
+@for $k from 1 through 5{
+    .nav#{$k}{
+        width: 30px*$k;
+    }
+}
+$list:success error warn;
+@each $xx in $list{
+    .#{$xx}{
+        background:url(#{$xx}.jpg);
+    }
+}
