@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .a{
+            background: #f00;
+        }
+        .b{
+            color: #00f;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-if="a">哈哈</div>
+        <div v-else>呵呵</div>
+
+        <h2 v-if="b=='x'">xxxx</h2>
+        <h2 v-else-if="b=='y'">yyyy</h2>
+        <h2 v-else>zzzz</h2>
+
+        <div v-show="a">嘿嘿</div>
+
+        <div v-bind:title="title" :id="xx+'-01'">{{msg}}</div>
+
+        <!-- class 属性名（class名） 属性值  true -->
+        <!-- <div :class="{a:isA,b:isB}">hahahhahahha</div> -->
+        <div :class="[classA,classB]">hehehehehe</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+    var vm= new Vue({
+        el:'#app',
+        data:{
+            a:true,
+            b:'x',
+            msg:'hello',
+            title:'title1',
+            xx:'xxy',
+            // isA:true,
+            // isB:false,
+            classA:'a',
+            classB:'b'
+        }
+    }) 
+    </script>
+</body>
+</html>
