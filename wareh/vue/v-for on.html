@@ -20,6 +20,14 @@
         <button @click="add(2,$event)">click +2</button>
         <button @click="add(2)">click +2</button>
         <button @click="add(3)">click +3</button>
+        <br>
+        <div :style="{background:bg,color:col}">
+            yayyayyayay
+        </div>
+
+        <div :style="obj">hhhhhhhhhhhhhh</div>
+
+        <div :style=[objBg,objWid]></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
@@ -28,7 +36,20 @@
         data:{
             stuList:['zhangsan','lisi','wangwu'],
             msg:'<h2>helllo</h2>',
-            count:0
+            count:0,
+            bg:"blue",
+            col:"pink",
+            obj:{
+                background:'yellow',
+                border:'10px solid #203564'
+            },
+            objBg:{
+                background:'yellow'
+            },
+            objWid:{
+                width:'200px',
+                height:'100px'
+            }
         },
         methods:{
             add(num){
