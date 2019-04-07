@@ -20,7 +20,7 @@
         <ul>
             <li v-for="(obj,index) in showList" :class="{a:obj.isA}" @click="change(obj)">
                 {{obj.val}}
-                <button @click="del(index)">del</button>
+                <button @click.stop="del(index)">del</button>
             </li>
         </ul>
     </div>
@@ -51,7 +51,8 @@
                     this.showList = [...this.list];
                 },
                 del(index) {
-                    this.list.splice(index, 1);
+                    this.list.splice(index,1);
+                    this.showList = [...this.list];
                 },
                 change(obj) {
                     obj.isA = !obj.isA;
