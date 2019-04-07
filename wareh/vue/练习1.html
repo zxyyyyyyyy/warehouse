@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #app {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        li {
+            list-style: none;
+            height: 50px;
+            line-height: 50px;
+            background: #00f;
+            padding: 0 20px;
+            margin-bottom: 10px;
+
+        }
+
+        li span {
+            float: right;
+        }
+
+        .a {
+            background: #ff0036;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h2>商品类表</h2>
+        <ul>
+            <li v-for="obj in proList" :class="{a:obj.isA}" @click="change(obj)">
+                {{obj.name}}
+                <span>{{obj.price}}</span>
+            </li>
+
+        </ul>
+        <hr>
+        <h3>
+            total:{{total()}}
+        </h3>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                proList: [
+                    {
+                        name: 'aaaa',
+                        price: 100,
+                        isA: false,
+                    },
+                    {
+                        name: 'bbbb',
+                        price: 100,
+                        isA: false,
+                    },
+                    {
+                        name: 'cccc',
+                        price: 100,
+                        isA: false,
+                    },
+                    {
+                        name: 'dddd',
+                        price: 100,
+                        isA: false,
+                    },
+                    {
+                        name: 'hhhh',
+                        price: 100,
+                        isA: false,
+                    },
+                    {
+                        name: 'ffff',
+                        price: 100,
+                        isA: false,
+                    },
+                ],
+                isA: false,
+                // total: 0,
+            },
+            methods: {
+                change(obj) {
+                    obj.isA = !obj.isA;
+                    // if (obj.isA) {
+                    //     this.total += obj.price;
+                    // } else {
+                    //     this.total -= obj.price;
+                    // }
+                },
+                total(){
+                    let count =0;
+                    this.proList.forEach(function(obj,index){
+                        if(obj.isA){
+                            count+=obj.price;
+                        }
+                    })
+                    return count;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
