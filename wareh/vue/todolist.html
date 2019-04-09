@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        width: 450px;
+        margin: 0 auto;
+    }
+    li{
+        background: #00f;
+
+        margin: 10px 0;
+        list-style: none;
+        height: 50px;
+        line-height: 50px;
+        padding: 0 20px;
+
+    }
+    li span{
+        float: right;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>todolist</h2>
+        <hr>
+        <div>
+            名称<input type="text" v-model="nam">
+            价格<input type="text" v-model="pri" name="" id="">
+            <button @click="add()">添加</button>
+            <br>
+            <input type="text" name="" id="" >
+            <button>搜索</button>
+        </div>
+        <div>
+            <ul>
+                <li v-for="obj in proList" >
+                    <input type="checkbox" name="" id="">
+                    {{obj.name}}
+                    <span>
+                        {{obj.price}}
+                        <button>X</button>
+                    </span>
+                    
+                </li>
+            </ul>
+        </div>
+        <div>
+            <button>删除选中</button>
+            总价：
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            proList:[
+                {
+                    name:"aaa",
+                    price:"111",
+                },
+
+            ],
+            nam:'',
+            pri:'',
+        },
+        methods:{
+            add(){
+                this.proList.push({name:this.nam })
+            }
+        }
+    })
+    </script>
+</body>
+</html>
