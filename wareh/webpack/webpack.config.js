@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlPlugin =require('html-webpack-plugin') 
+const ExtractTextPlugin= require('extract-text-webpack-plugin')
 module.exports ={
     mode:'development',
     entry:{
@@ -14,10 +15,14 @@ module.exports ={
         rules:[
             {
                 test:/\.css$/,
-                use:['style-loader','css-loader']
+                // use:['style-loader','css-loader']
+                use:ExtractTextPlugin.extract({
+                    fallback:"style-loader",
+                    use:"css-loader",
+                })
             }
         ]
-    }
+    },
     plugins:[
         new HtmlPlugin({
             // filename:'xx.html',   //打包出去的文件名
@@ -27,8 +32,9 @@ module.exports ={
             // }
             template:'./src/index.html',  //要打包的绝对路径和文件名
             // hast:true,     //避免缓存
-        })，
+        }),
         //多个页面打包  继续new 一个新的
+        new ExtractTextPlugin("css/index.css")
     ],
     devServer:{
         contentBase:path.resolve(__dirname,'dist'),
