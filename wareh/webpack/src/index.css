@@ -1,3 +1,9 @@
 body{
-    background: #f00;
+    background: red url(./images/3.jpg);
+}
+img{
+    transform: rotate(30deg);
+}
+.a{
+    height: 300px;
 }

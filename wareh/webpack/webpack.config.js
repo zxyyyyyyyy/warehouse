@@ -1,8 +1,14 @@
 const path = require('path');
 const HtmlPlugin =require('html-webpack-plugin') 
 const ExtractTextPlugin= require('extract-text-webpack-plugin')
+const glob = require('glob');
+const PurifyCSSPlugin = require("purifycss-webpack");
+const webpack = require('webpack');
+// const entry = require("./webpack_config/entry_webpack.js");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports ={
-    mode:'development',
+    mode:'development',  //production   上线打包
+    // entry:entry,
     entry:{
         index:'./src/index.js',
         // index1:'./src/index1.js'  可以多个入口文件
@@ -10,6 +16,7 @@ module.exports ={
     output:{
         path:path.resolve(__dirname,'dist'),   //绝对路径
         filename:'[name].js',
+        // publicPath:'http://localhost:8081/'
     },
     module:{
         rules:[
@@ -18,9 +25,45 @@ module.exports ={
                 // use:['style-loader','css-loader']
                 use:ExtractTextPlugin.extract({
                     fallback:"style-loader",
-                    use:"css-loader",
+                    use:[{
+                        loader:"css-loader",
+                        options:{importLoaders:1}
+                    },'postcss-loader'],
                 })
-            }
+            },
+            {
+                test:/\.(png|jpg|gif)$/,
+                use:[{
+                    loader:'url-loader',
+                    options:{
+                        limit:500,
+                        outputPath:'images/',
+                    }
+                }]
+            },
+            {
+                test:/\.(htm|html)$/i,
+                use:'html-withimg-loader',
+            },
+            {
+                test:/\.scss$/,
+                // use:['style-loader','css-loader','sass-loader'],
+                use:ExtractTextPlugin.extract({
+                    use:["css-loader","sass-loader"],
+                    fallback:"style-loader",
+                })
+            },
+            {
+                test:/\.js$/,
+                use:[{
+                    loader:'babel-loader',
+                    options:{
+                        presets:["@babel/preset-env"]
+                    }
+                }],
+                exclude:/node_modules/,  //忽略node_module文件夹 不转es5
+            },
+
         ]
     },
     plugins:[
@@ -34,7 +77,18 @@ module.exports ={
             // hast:true,     //避免缓存
         }),
         //多个页面打包  继续new 一个新的
-        new ExtractTextPlugin("css/index.css")
+        new ExtractTextPlugin("css/index.css"),
+        new PurifyCSSPlugin({
+            paths: glob.sync(path.join(__dirname,'src/*.html')),
+        }),
+        new webpack.BannerPlugin('翻版必究！'),
+        new webpack.ProvidePlugin({
+            $:"jquery",
+        }),
+        new CopyWebpackPlugin([{
+            from:__dirname + '/src/public',
+            to:'./public',
+        }])
     ],
     devServer:{
         contentBase:path.resolve(__dirname,'dist'),
