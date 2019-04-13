@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    #app{
+        width: 450px;
+        margin: 0 auto;
+    }
+    ul{
+        list-style: none;
+       
+    }
+    li{
+        background: #ccc;
+        height: 50px;
+        margin: 20px 0;
+        line-height: 50px;
+        padding: 0 10px;
+    }
+    li span{
+        float: right;
+    }
+    #allDel{
+        float: right;
+    }
+    .active{
+        background: #f00;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>todolist</h2>
+        <hr>
+        名称：<input type="text">
+        价格：<input type="text">
+        <button @click="add()">添加</button>
+        <ul>
+            <li v-for="(obj,index) in proList" :class="{active:obj.isActive}"  @click="change(obj)">
+                <input type="checkbox">
+                {{obj.name}}
+                <span>{{obj.price}}
+                    <button @click="del(index)">X</button>
+                </span>
+                
+            </li>
+        </ul>
+        <span>
+            总价为：{{sum()}}
+            
+        </span>
+        <button id="allDel" @click="allDel()">删除所选</button>
+        
+
+    </div>
+    <script src="vue.js"></script>
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            proList:[
+                {
+                    name:"aaa",
+                    price:"111",
+                    isActive:false,
+                },
+                {
+                    name:"bbb",
+                    price:"222",
+                    isActive:false,
+
+                },
+                {
+                    name:"ccc",
+                    price:"222",
+                    isActive:false,
+
+                },
+                {
+                    name:"ddd",
+                    price:"222",
+                    isActive:false,
+
+                },
+             ],
+            isActive:false,
+            
+            
+        },
+        methods:{
+            change(obj){
+                obj.isActive = !obj.isActive;
+            },
+            del(index){
+                this.proList.splice(index,1)
+            },
+            allDel(){
+                if(isActive){
+                    
+                }
+            },
+            sum(obj){
+                let total = 0;
+                this.proList.forEach(function(obj){
+                    if(obj.isActive){
+                    total+=obj.price;
+                }
+                return total;
+                })
+                
+            },
+            add(){
+                this.proList.push(name=this.name,price=this.price)
+            }
+            
+        }
+    })
+    </script>
+</body>
+</html>
