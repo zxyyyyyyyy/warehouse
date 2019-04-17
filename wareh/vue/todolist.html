@@ -8,21 +8,33 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        .a {
+            background: red;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
         <h2 class="text-center">todolist</h2>
-        <div>
-            名称：<input type="text" class="form-control" placeholder="Text input">
-            价格：<input type="text" class="form-control" placeholder="Text input">
-            <div class="col-lg-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search for...">
-                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                      </span>
-        </div>
+        <form class="form-inline text-center">
+            <div class="form-group">
+                <input type="text" class="form-control"  id="exampleInputName2" placeholder="请输入过滤名称" v-model="msg">
+            </div>
+            <button type="submit" class="btn btn-default" @click.prevent="filter()">过滤</button>
+            <br>
+            <div class="form-group">
+                <label for="exampleInputName2">Name</label>
+                <input type="text" class="form-control" v-model="proName" id="exampleInputName2" placeholder="请输入名称">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail2">Price</label>
+                <input type="number" class="form-control" v-model="proPrice" id="exampleInputEmail2"
+                    placeholder="请输入价格">
+            </div>
+            <button type="submit" class="btn btn-default" @click.prevent="add()">添加</button>
+        </form>
         <table class="table table-bordered text-center">
 
             <thead>
@@ -32,15 +44,16 @@
                 <td>删除</td>
             </thead>
             <tbody>
-                <tr v-for="obj in proList">
-                    <td><input type="checkbox"></td>
+                <tr v-for="(obj,index) in showList" :class="{a:obj.isA}" @click="change(obj)">
+                    <td><input type="checkbox" v-model="obj.isA"></td>
                     <td>{{obj.name}}</td>
                     <td>{{obj.price}}</td>
-                    <td><button type="button" class="btn btn-warning btn-xs glyphicon glyphicon-remove"></button></td>
+                    <td><button type="button" class="btn btn-warning btn-xs glyphicon glyphicon-remove"
+                            @click.stop="del(obj)"></button></td>
                 </tr>
                 <tr>
-                    <td><button type="button" class="btn btn-danger btn-xs">删除选中</button></td>
-                    <td colspan="3">总价是： 0 元</td>
+                    <td><button type="button" class="btn btn-danger btn-xs" @click="allDel()">删除选中</button></td>
+                    <td colspan="3">总价是：{{total}}元</td>
                 </tr>
             </tbody>
         </table>
@@ -48,28 +61,114 @@
 
     <script src="vue.js"></script>
     <script>
-        new Vue({
+        var vm = new Vue({
             el: '#app',
             data: {
                 proList: [
                     {
                         name: 'aaa',
                         price: 111,
+                        isA: false
                     },
                     {
                         name: 'bbb',
                         price: 111,
+                        isA: false
                     },
                     {
                         name: 'ccc',
                         price: 111,
+                        isA: false
                     },
                     {
                         name: 'ddd',
                         price: 111,
+                        isA: false
                     },
-                ]
+                ],
+                proName: '',
+                proPrice: 0,
+                isA: false,
+                showList:[{
+                        name: 'aaa',
+                        price: 111,
+                        isA: false
+                    },
+                    {
+                        name: 'bbb',
+                        price: 111,
+                        isA: false
+                    },
+                    {
+                        name: 'ccc',
+                        price: 111,
+                        isA: false
+                    },
+                    {
+                        name: 'ddd',
+                        price: 111,
+                        isA: false
+                    },],
+                msg:'',
             },
+            methods: {
+                add() {
+                    this.proList.push({
+                        name: this.proName,
+                        price: number.parseInt(this.proPrice),
+                        isA: false,
+                    })
+                    this.proName='';
+                    this.proPrice='';
+                    this.showList=[...this.proList];
+                },
+                change(obj) {
+                    obj.isA = !obj.isA
+                },
+                del() {
+                    this.proList.splice(, 1);
+                    this.showList=[...this.proList];
+                },
+                allDel() {
+
+                    // this.proList.forEach((obj,index) => {
+                    //     if(obj.isA){
+                    //         this.proList.splice(obj,1);
+                    //     }
+                    // })
+
+                    var arr = this.proList.filter(function (obj, index) {
+                        return !obj.isA;
+                    })
+                    this.showList = arr;
+                },
+                filter(){
+                    var arrt = this.showList.filter((obj,index) => {
+                        return   obj.name.includes(this.msg);
+                    })
+                    this.showList = arrt;
+                }
+                // total() {
+                //     let count = 0;
+                //     this.proList.forEach(function (obj, index) {
+                //         if (obj.isA) {
+                //             count += obj.price;
+                //         }
+                //     })
+                //     return count ;
+                // }
+            },
+            computed: {
+                total() {
+                    let count = 0;
+                    this.showList.forEach(function (obj, index) {
+                        if (obj.isA) {
+                            count += obj.price;
+                        }
+                    })
+                    return count;
+                }
+            }
         })
     </script>
 </body>

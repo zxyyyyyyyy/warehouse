@@ -40,15 +40,15 @@
     <div id="app">
         <h2>todolist</h2>
         <hr>
-        名称：<input type="text">
-        价格：<input type="text">
+        名称：<input type="text" v-model="proName">
+        价格：<input type="number" v-model="proPrice">
         <button @click="add()">添加</button>
         <ul>
             <li v-for="(obj,index) in proList" :class="{active:obj.isActive}"  @click="change(obj)">
-                <input type="checkbox">
+                <input type="checkbox" v-model="obj.isActive">
                 {{obj.name}}
                 <span>{{obj.price}}
-                    <button @click="del(index)">X</button>
+                    <button @click.stop="del(index)">X</button>
                 </span>
                 
             </li>
@@ -92,7 +92,8 @@
                 },
              ],
             isActive:false,
-            
+            proName:'',
+            proPrice:0
             
         },
         methods:{
@@ -103,11 +104,12 @@
                 this.proList.splice(index,1)
             },
             allDel(){
-                if(isActive){
-                    
-                }
+                let arr = this.proList.filter(function(obj,index){
+                    return !isActive;
+                })
+                this.proList=arr;
             },
-            sum(obj){
+            sum(){
                 let total = 0;
                 this.proList.forEach(function(obj){
                     if(obj.isActive){
@@ -118,7 +120,10 @@
                 
             },
             add(){
-                this.proList.push(name=this.name,price=this.price)
+                this.proList.push({
+                    name:this.proName,
+                    price:this.parseInt(proPrice)
+                    })
             }
             
         }
