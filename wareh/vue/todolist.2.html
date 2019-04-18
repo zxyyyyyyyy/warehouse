@@ -20,7 +20,7 @@
         <h2 class="text-center">todolist</h2>
         <form class="form-inline text-center">
             <div class="form-group">
-                <input type="text" class="form-control"  id="exampleInputName2" placeholder="请输入过滤名称" v-model="msg">
+                <input type="text" class="form-control" id="exampleInputName2" placeholder="请输入过滤名称" v-model="msg">
             </div>
             <button type="submit" class="btn btn-default" @click.prevent="filter()">过滤</button>
             <br>
@@ -44,12 +44,12 @@
                 <td>删除</td>
             </thead>
             <tbody>
-                <tr v-for="(obj,index) in showList" :class="{a:obj.isA}" @click="change(obj)">
+                <tr v-for="(obj,index) in showList" :key="obj.id" :class="{a:obj.isA}" @click="change(obj.id)">
                     <td><input type="checkbox" v-model="obj.isA"></td>
                     <td>{{obj.name}}</td>
                     <td>{{obj.price}}</td>
                     <td><button type="button" class="btn btn-warning btn-xs glyphicon glyphicon-remove"
-                            @click.stop="del(index)"></button></td>
+                            @click.stop="del(obj.id)"></button></td>
                 </tr>
                 <tr>
                     <td><button type="button" class="btn btn-danger btn-xs" @click="allDel()">删除选中</button></td>
@@ -68,48 +68,56 @@
                     {
                         name: 'aaa',
                         price: 111,
-                        isA: false
+                        isA: false,
+                        id: 1,
                     },
                     {
                         name: 'bbb',
                         price: 111,
-                        isA: false
+                        isA: false,
+                        id: 2,
                     },
                     {
                         name: 'ccc',
                         price: 111,
-                        isA: false
+                        isA: false,
+                        id: 3,
                     },
                     {
                         name: 'ddd',
                         price: 111,
-                        isA: false
+                        isA: false,
+                        id: 4,
                     },
                 ],
                 proName: '',
                 proPrice: 0,
                 isA: false,
-                showList:[{
-                        name: 'aaa',
-                        price: 111,
-                        isA: false
-                    },
-                    {
-                        name: 'bbb',
-                        price: 111,
-                        isA: false
-                    },
-                    {
-                        name: 'ccc',
-                        price: 111,
-                        isA: false
-                    },
-                    {
-                        name: 'ddd',
-                        price: 111,
-                        isA: false
-                    },],
-                msg:'',
+                showList: [{
+                    name: 'aaa',
+                    price: 111,
+                    isA: false,
+                    id: 1,
+                },
+                {
+                    name: 'bbb',
+                    price: 111,
+                    isA: false,
+                    id: 2,
+                },
+                {
+                    name: 'ccc',
+                    price: 111,
+                    isA: false,
+                    id: 3,
+                },
+                {
+                    name: 'ddd',
+                    price: 111,
+                    isA: false,
+                    id: 4,
+                },],
+                msg: '',
             },
             methods: {
                 add() {
@@ -117,17 +125,29 @@
                         name: this.proName,
                         price: Number.parseInt(this.proPrice),
                         isA: false,
+                        id: Symbol(),
                     })
-                    this.proName='';
-                    this.proPrice='';
-                    this.showList=[...this.proList];
+                    this.proName = '';
+                    this.proPrice = '';
+                    this.showList = [...this.proList];
                 },
-                change(obj) {
-                    obj.isA = !obj.isA
+                change(id) {
+                    console.log(obj.id,id);
+                    let changeList = this.proList.map(function (obj, index) {
+                        if (obj.id == id) {
+                            obj.isA = !obj.isA;
+                        }
+                        return obj;
+                    })
+                    this.proList = [...changeList];
+                    this.shoeList = [...changeList];
                 },
-                del(index) {
-                    this.proList.splice(index, 1);
-                    this.showList=[...this.proList];
+                del(id) {
+                   let arr1 = this.proList.filter(function(obj,index){
+                        return !obj.isA;
+                    })
+                    this.showList = [...arr1];
+                    this.proList = [...arr1];
                 },
                 allDel() {
 
@@ -138,15 +158,16 @@
                     // })
 
                     var arr = this.proList.filter(function (obj, index) {
-                        return !obj.isA;
+                        return obj.id != id;
                     })
                     this.showList = arr;
                 },
-                filter(){
-                    var arrt = this.showList.filter((obj,index) => {
-                        return   obj.name.includes(this.msg);
+                filter() {
+                    var arrt = this.proList.filter((obj, index) => {
+                        return obj.name.includes(this.msg);
                     })
                     this.showList = arrt;
+                    this.msg=''
                 }
                 // total() {
                 //     let count = 0;
