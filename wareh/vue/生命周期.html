@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        {{count}}
+        <button @click="count++">+++</button>
+        <button @click="fn()">click</button>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+    let vm=new Vue({
+        el:'#app',
+        data:{
+            msg:'hello',
+            count:0,
+        },
+        //创建之前   都没有
+        beforeCreate(){
+            console.log('beforeCreate',this.$el,this.$data);
+        },
+        //创建之后   还没有el
+        created(){
+            console.log('created',this.$el,this.$data);
+        },
+        //挂载之前   {{msg}}   el有了但没挂载
+        beforeMount(){
+            console.log('beforeMount',this.$el,this.$data);
+        },
+        //挂载之后   hello
+        mounted(){
+            console.log('mounted',this.$el,this.$data);
+        },
+        //更新之前
+        beforeUpdate(){
+            console.log('beforeupdate');
+        },
+        //更新之后
+        updated(){
+            console.log('updated');
+        },
+        //销毁之前
+        beforeDestroy(){
+            console.log('beforedestroy');
+        },
+        //销毁之后
+        destroyed(){
+            console.log('destroy');
+        },
+        methods:{
+            fn(){
+                vm.$destroy();
+            }
+        }
+
+
+    })
+    </script>
+</body>
+</html>
