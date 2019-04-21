@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 可重用，好维护 -->
+    <div id="app">
+        <!-- 组件调用 -->
+        <demo></demo>
+
+    </div>
+    <div id="app1">
+        <demo></demo>
+    </div>
+
+
+    <div id="app2">
+        <demo name='哈哈哈哈哈' age=20>
+            <!-- slot 标签内容 -->
+            <h3 slot="slot1">内容哈哈哈哈哈哈</h3>
+            <div slot="slot2">
+                <p >dkkvsdabfdhz</p>
+                <span>safgfdghgjh</span>
+            </div>
+            
+        </demo>
+        <demo name='呵呵呵呵呵' age=90>
+            <h3>n内容和文化和文化为呵呵呵</h3>
+        </demo>
+        <demo name='嘿嘿嘿嘿嘿' age=70></demo>
+    </div>
+
+    <!-- 把下面的模板提上来单独写    -->
+    <template id="temp">
+       <!-- 只能有一个根属性，所以在外边包一个<div> -->
+        <div>
+            <slot name="slot1"></slot>
+             <h2>{{name}}------{{age}}</h2>
+             <p>{{age}}</p>
+             <div>
+                 <!-- slot 标签用于  占位  传内容
+                   slot  放在哪里， 传的内容就在那里 -->
+                 <slot name="slot2"></sot>
+             </div>
+        </div>
+           
+    </template>
+
+    <script src="vue.js"></script>
+    <script>
+        //组件   全局组件
+        Vue.component("demo", {
+            template: "<h1>hahahhaah</h1>"
+        })
+
+        let vm = new Vue({
+            el: '#app',
+
+        })
+        let vm1 = new Vue({
+            el: '#app1',
+
+        })
+
+        //局部组件   在实例化vue中定义组件   只能在该vue中调用
+        let vm2 = new Vue({
+            el: '#app2',
+
+            components: {
+                "demo": {
+                    // template: "<h2>{{name}}</h2>",
+                    //单提出去
+                    template: "#temp",
+                    //可传参  定义属性
+                    //父组件向子组件传参  使用Props
+                    props: ['name','age'],
+                    //子组件中可定义自己的data  防止所有都指向一个对象，改了一个其他也受到影响
+                    data:function(){
+                        return {
+                            xx:'hehe',
+                        }
+                    }
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .dialog {
+            width: 400px;
+            height: 300px;
+            background: #ccc;
+            border: 1px solid #000;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            margin-left: -200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- @close 自定义事件 -->
+        <my-dialog title='登录' @close='fn'>
+            <h1>内容 </h1>
+        </my-dialog>
+        <my-dialog title='注册' @close='fn'>
+            <div>
+                <label for="">用户名：</label>
+                <input type="text">
+            </div>
+
+            <div>
+                <label for="">密码：</label>
+                <input type="text">
+            </div>
+
+        </my-dialog>
+    </div>
+
+    <template id="dial">
+        <div class="dialog">
+            <div class="dialog-title">
+                <span>{{title}}</span>
+                <!--从子组件向父组件传值  $emit(自定义事件，参数) -->
+                <span @click="$emit('close',title)">[X]</span>
+            </div>
+            <div class="dialog-content">
+                <slot></slot>
+            </div>
+        </div>
+    </template>
+
+    <script src="vue.js"></script>
+    <script>
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            components: {
+                "my-dialog": {
+                    template: "#dial",
+                    props: [
+                        'title',
+                    ]
+                }
+            },
+            methods:{
+                fn(msg){
+                    console.log(msg);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
