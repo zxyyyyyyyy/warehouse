@@ -1,32 +1,22 @@
-
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div>
+    <div id="app">
+      <!-- 内容进行切换，页面不更新 -->
+      <router-link to="/home">首页</router-link>|
+      <router-link to='/a'>A页面</router-link>|
+      <router-link to='/b'>B页面</router-link>
     </div>
-    <router-view/>
+    <!-- 用于占位  <router-view/> -->
+    <router-view/>  
   </div>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+<script>
+  export default {
+    
+  }
+</script>
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+<style lang="scss" scoped>
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
