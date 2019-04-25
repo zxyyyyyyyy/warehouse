@@ -1,10 +1,9 @@
 <template>
     <div>
-        <h2>B页面</h2>
-
-    {{$route.params.name}}
-    --------
-  
+   <h3>C页面</h3>
+   {{$route.params.id}}
+   ----------------------
+   {{$store.state.count}}
     </div>
 </template>
 

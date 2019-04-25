@@ -1,10 +1,9 @@
 <template>
     <div>
-        <h2>B页面</h2>
-
-    {{$route.params.name}}
-    --------
-  
+   <h1>页面错误
+       -------data-----
+       404404404404
+   </h1>
     </div>
 </template>
 

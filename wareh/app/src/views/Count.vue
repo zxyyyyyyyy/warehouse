@@ -1,18 +1,16 @@
 <template>
     <div>
-        <h2>B页面</h2>
-
-    {{$route.params.name}}
-    --------
-  
+        count
+        {{$store.state.count}}
     </div>
 </template>
 
 <script>
     export default {
-        data:function() {
-            return {
-                msg:'xxx'
+        computed: {
+            count(){
+                return this.$store.state.count;
+                
             }
         },
     }
