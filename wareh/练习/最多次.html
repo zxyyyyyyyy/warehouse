@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var str = "gfnsdgsdjfiijdfidjferirgfd";
+        var o = {};
+        for (var i = 0, length = str.length; i < length; i++) {
+            var char = str.charAt(i);
+            if (o[char]) {
+                o[char]++;
+            } else {
+                o[char] = 1;
+            }
+        }
+        console.log(o);
+        var max = 0;
+        var maxChar = null;
+        for (var key in o) {
+            if (max < o[key]) {
+                max = o[key];
+                maxChar = key;
+            }
+        }
+        console.log("最多的字符是" + maxChar);
+        console.log("出现的次数是" + max);
+
+    </script>
+
+
+</body>
+
+</html>
