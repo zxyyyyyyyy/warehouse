@@ -1,14 +1,16 @@
 <template>
-  <div class="header">
+  <div class="header" :style="{background:selectMeau.bg}">
     <div>
       <span class="header-btn">首页</span>
-      <span class="header-title">电影</span>
+      <span class="header-title">{{selectMeau.name}}</span>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+    props:['selectMeau']
+};
 </script>
 
 <style scope>
