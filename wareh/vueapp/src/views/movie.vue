@@ -21,6 +21,9 @@
         </div>
       </li>
     </ul>
+    <div class="loading " v-show="isShow">
+        <img src="@/assets/imgs/loading.gif" alt="">
+    </div>
   </div>
 </template>
 
@@ -30,18 +33,50 @@
         data() {
             return {
                movieList:[], 
+               isShow:true,
+               isBottom:false,
             }
         },
         created() {
             //No 'Access-Control-Allow-Origin' 跨域
             //跨域问题  域名 协议 端口号   只要有一个不同即为跨域 安全限制  
             //jsonbird  解决跨域
-            // axios.get('https://bird.ioliu.cn/v1?url=https://api.douban.com/v2/movie/in_theaters?city=广州&start=0&count=10')
-            axios.get('/data/movie0.json')
+
+            // axios.get('https://bird.ioliu.cn/v1?url=https://api.douban.com/v2/movie/in_theaters?city=深圳&start=0&count=10')
+            // // axios.get('/data/movie0.json')
+            // .then((result) => {
+            //     this.movieList = result.data.subjects;
+            //     console.log(this.movieList);
+            // })
+    this.getMovie();
+    window.onscroll=()=>{
+        //滚动条滚动的距离高度
+        let scrollTop = document.documentElement.scrollTop;
+        // 可视区高度
+        let clientHeight = document.documentElement.clientHeight;
+        // 页面的总高度
+        let scrollHeight = document.documentElement.scrollHeight;
+        if(scrollTop + clientHeight == scrollHeight && !isBottom){
+            //加载下一屏
+            this.getMovie();
+            
+        }
+    }
+
+        },
+        methods: {
+            getMovie(){
+                axios.get('https://bird.ioliu.cn/v1?url=https://api.douban.com/v2/movie/in_theaters?city=深圳&start='+this.movieList.length+'&count=10')
+            // axios.get('/data/movie0.json')
             .then((result) => {
-                this.movieList = result.data.subjects;
+                this.isShow = false;
+                this.movieList = [...this.movieList,...result.data.subjects];
+    if(this.movieList.length == result.data.total){
+                        this.isBottom = true;
+                    }
                 console.log(this.movieList);
             })
+            }
         },
     }
 </script>
@@ -62,5 +97,12 @@
 }
 .movie-text{
     flex:1;
+}
+.loading{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background:rgba(0, 0,0,0.5);
 }
 </style>
