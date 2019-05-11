@@ -1,15 +1,15 @@
 <template>
-  <div class="header" :style="{background:selectMeau.bg}">
+  <div class="header" :style="{background:selectMenu.bg}">
     <div>
       <span class="header-btn">首页</span>
-      <span class="header-title">{{selectMeau.name}}</span>
+      <span class="header-title">{{selectMenu.name}}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-    props:['selectMeau']
+    props:['selectMenu']
 };
 </script>
 

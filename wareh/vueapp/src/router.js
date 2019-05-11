@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Movie from '@/views/movie.vue'
+import MovieDetail from '@/views/movieDetail.vue'
+
 import Music from '@/views/music.vue'
 import Musiclist from '@/views/musiclist.vue'
 
@@ -17,6 +19,10 @@ export default new Router({
     {
       path:"/movie",
       component:Movie,
+    },
+    {
+      path:"/moviedetail/:id",
+      component:MovieDetail,
     },
     {
       path:"/music",

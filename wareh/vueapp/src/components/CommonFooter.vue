@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
-    <ul class="footer-list" :style="{background:selectMeau.bg}">
-      <li v-for="(obj,index) in meau" :key="index" @click="$emit('change')">
+    <ul class="footer-list" :style="{background:selectMenu.bg}">
+      <li v-for="(obj,index) in menu" :key="index" @click="$emit('change',index)">
         <router-link :to="obj.path">{{obj.name}}</router-link>
         </li> 
     </ul>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    props:["meau","selectMeau"]
+    props:["menu","selectMenu"]
 };
 </script>
 
