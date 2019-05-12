@@ -7,6 +7,8 @@ import Music from '@/views/music.vue'
 import Musiclist from '@/views/musiclist.vue'
 
 import Photo from '@/views/photo.vue'
+import PhotoDetail from '@/views/photoDetail.vue'
+
 import Book from '@/views/book.vue'
 
 
@@ -21,7 +23,7 @@ export default new Router({
       component:Movie,
     },
     {
-      path:"/moviedetail/:id",
+      path:"/movieDetail/:id",
       component:MovieDetail,
     },
     {
@@ -35,6 +37,10 @@ export default new Router({
     {
       path:"/photo",
       component:Photo,
+    },
+    {
+      path:"/photoDetail",
+      component:PhotoDetail,
     },
     {
       path:"/book",
