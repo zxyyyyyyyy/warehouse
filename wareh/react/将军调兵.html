@@ -31,7 +31,7 @@
             console.log(num,name);
             this.setState({
                 total:this.state.total - num,
-                ['num'+name]:this.state['num'+name] - num,
+                ['num'+name]:this.state['num'+name] + parseInt(num),
             })
         }
         render(){
