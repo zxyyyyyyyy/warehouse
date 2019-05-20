@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+    .aa{
+        background: #f00;
+    }
+    </style>
 </head>
 
 <body>
@@ -34,11 +39,15 @@
             })
         }
         render(){
+            let style={
+                color:'#f00',
+                background:'#00f'
+            }
             return(
                 // <form>
                 <div>
-                    用户名:<input type="text" ref={input => this.myInput = input}/>
-                    密码:<input type="password" onChange={this.change}/>
+                    用户名:<input type="text" className="aa" style={{color:'#0f0'}} ref={input => this.myInput = input}/>
+                    密码:<input type="password" style={style} onChange={this.change}/>
                     <button onClick={this.show}>click</button>
                 </div>
                 // </form>

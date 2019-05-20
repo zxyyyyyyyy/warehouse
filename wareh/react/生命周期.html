@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+    
+    <script type='text/babel'>
+       class Main extends React.Component{
+           constructor(props){
+               super(props);
+               this.state={
+                   num:0
+               }
+               console.log('constructor');
+               this.add=this.add.bind(this);
+           }
+           //父组件生命周期
+           componentWillMount(){
+               console.log('componentWillMount')
+           }
+           componentDidMount(){
+            console.log('componentDidMount')
+
+           }
+           //性能优化  很重要   shouldComponentUpdate
+           shouldComponentUpdate(nextProps,nextState){
+            console.log('shouldComponentUpdate',nextProps,nextState)
+            // if(nextState.num == this.state.num){
+            //         //  不进行更新
+            //    return false;
+            // }
+            return true;
+           }
+           componentWillUpdate(nextProps,nextState){
+            console.log('componentWillUpdate',this.state.num)
+           }
+           componentDidUpdate(){
+            console.log('componentDidUpdate',this.state.num)
+            }
+
+           add(){
+               this.setState({
+                   num:this.state.num+1
+               })
+           }
+           destory(){
+            ReactDOM.
+           }
+           componentWillUpdate
+           render(){
+            console.log('render')
+
+               return(
+                   <div>
+                    <h1>{this.state.num}</h1>
+                    <button onClick={this.add}>add</button>
+                    <button onClick={this.destory}>destory</button>
+                    <Child num={this.state.num}></Child>
+                    </div>
+               )
+           }
+       }
+
+       class Child extends React.Component{
+           //子组件自己的生命周期
+           componemntWillReceiveProps(nextProps){
+            console.log('Child  componemntWillReceiveProps');
+           }
+           shouldComponentUpdate(nextProps,nextState){
+               console.log('Child  shouldComponentUpdate');
+               return true;
+           }
+           componentWillUpdate(nextProps,nextState){
+            console.log('Child   componentWillUpdate',this.state.num)
+           }
+           componentDidUpdate(){
+            console.log('Child componentDidUpdate',this.state.num)
+            }
+           render(){
+               return(
+                   <h3>{this.props.num}</h3>
+               )
+    }
+       }
+        ReactDOM.render(
+            <Main></Main>
+            ,
+            document.getElementById('app')
+        )
+</script>
+</body>
+
+</html>

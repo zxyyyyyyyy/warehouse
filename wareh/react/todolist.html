@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .red{
+        background: #f00;
+    }
+    .hide{
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+    <script type="text/babel">
+    class Main extends React.Component{
+        constructor(params){
+            super(params);
+            this.state ={
+                todos:[
+                    {
+                        name:'吃饭',
+                        siActice:false,
+                        id:1,
+                        isShow:true
+                    },
+                    {
+                        name:'睡觉',
+                        siActice:false,
+                        id:2,
+                        isShow:true
+                    },
+                    {
+                        name:'敲代码',
+                        siActice:false,
+                        id:3,
+                        isShow:true
+                    },
+                ],
+            }
+            this.addHandle=this.addHandle.bind(this);
+            this.changeColorHandle=this.changeColorHandle.bind(this);
+            this.deleteHandle=this.deleteHandle.bind(this);
+            this.searchHandle=this.searchHandle.bind(this);
+
+        }
+        addHandle(value){
+            console.log(value);
+            let todos = [...this.state.todos];
+            todos.push({
+                name:value,
+                isActice:false,
+                id:(new Date()).getTime(),
+                isShow:true
+            });
+            this.setState({
+            //    todos:todos 属性名和变量名同名时，可简写
+                todos
+            })
+            
+        }
+        changeColorHandle(index){
+            //将todos数组中索引是index的元素的isActice属性取反
+            let todos = [...this.state.todos];
+            todos[index].isActice=!todos[index].isActice;
+           this.setState({
+                todos
+           })
+           console.log(this.state.todos);
+        }
+        deleteHandle(index){
+            //找到数组中  索引是index的元素 删除掉
+            let todos =[...this.state.todos];
+            todos.splice(index,1);
+            this.setState({
+                todos
+            })
+        }
+        searchHandle(value){
+            //从todos数组中将name属性中包含value的 对象的isShow属性，设置成true  不包含的设置成false
+            let todos = [...this.state.todos];
+            todos.forEach((obj,index) => {
+                //obj的name包含value
+                if(obj.name.includes(value)){
+                    obj.isShow= true;
+                }else{
+                    obj.isShow=false;
+
+                }
+
+            });
+            this.setState({
+                todos
+            })
+        }
+        render(){
+            return(
+                <div>
+                    <h1>todolist</h1> 
+                    <Search searchHandle={this.searchHandle}></Search>
+                    <Add addHandle={this.addHandle}></Add>
+                    <List todos={this.state.todos} deleteHandle={this.deleteHandle}
+                 changeColorHandle={this.changeColorHandle}></List>
+                </div>
+            )
+        }
+    }
+    class Search extends React.Component{
+        constructor(params){
+            super(params);
+
+        }
+        render(){
+            return(
+                <div>
+                    搜索：<input type="text" onChange={(e)=>{
+                        this.props.searchHandle(e.target.value)
+                    }}  />
+                </div>
+            )
+        }
+    }
+    class Add extends React.Component{
+        constructor(params){
+           super(params)
+            this.add = this.add.bind(this);
+        }
+        add(){
+            //取到input中的value
+            // this.myInput.value
+
+
+            //传给main父组件  调用父组件中传过来的方法
+            this.props.addHandle( this.myInput.value);
+
+
+        }
+        render(){
+            return(
+                <div>
+                   添加：<input type="text" ref={input => this.myInput = input}/>
+                   <button onClick={this.add}>添加</button> 
+                    
+                </div>
+            )
+        }
+    }
+    class List extends React.Component{
+        constructor(params){
+            super(params);
+        }
+        
+        render(){
+            return(
+                <div>
+                    <ul>
+                    {
+                        this.props.todos.map((obj,index) => {
+                            let class1=obj.isActice?'red':'';
+                            let class2=obj.isShow?'':'hide';
+
+                            
+                            return(
+                                <div>
+                                   
+                                    <li  className={class1+""+class2} key={obj.id} onClick={()=>{
+                                        this.props.changeColorHandle(index);
+                                    }} >
+                                    {obj.name} 
+                                    <button onClick={(e)=>{
+                                        this.props.deleteHandle(index);
+                                        e.stopPropagation();
+                                        
+                                    } }>删除</button>
+                                    </li>
+                                    
+                                </div>
+                            )
+                        })
+                    }
+                    </ul>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(
+        <Main></Main>
+        ,
+        document.getElementById('app')
+    )
+    </script>
+</body>
+</html>
