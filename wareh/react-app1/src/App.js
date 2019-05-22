@@ -34,7 +34,6 @@ function App() {
        {/* <Route path="/" component={Home}></Route>
        <Route path="/a" component={A}></Route>
        <Route path="/b" component={B}></Route> */}
-
          
 
        <Route exact path="/" component={Home}></Route>
