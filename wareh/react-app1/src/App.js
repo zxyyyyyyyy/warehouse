@@ -20,7 +20,8 @@ function App(props) {
       <button onClick={()=>{
         console.log('我要修改Num值');
         //通过store.dispatch触发action修改num
-        store.dispatch(add(2));
+        // store.dispatch(add(2));
+        props.add();
       }}>add</button>
 <button onClick={()=>{
         console.log('我要修改Num值');
@@ -76,4 +77,4 @@ let mapStateToProps =(state) =>{
     num:state.num
   }
 }
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps,{add})(App);
