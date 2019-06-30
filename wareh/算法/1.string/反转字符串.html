@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str = "dff  dfds sdsg sddg";
+        function reverseWords(s) {
+        //第一种
+        // let ar = s.split(" ");
+        //[dff,dfds,sdsg,sddg]
+
+        // let res = ar.map((item)=>{
+        //     return item.split("").reverse().join("");
+        //     //[d,f,f]    ffd
+        // });
+        // return res.join(" ");
+        // //ffd sdfd gsds gdds
+
+        // 第二种
+        // return s.split(" ").map((item)=>{
+        //     return item.split("").reverse().join("");
+        //     //[d,f,f]    ffd
+        // }).join(" ");
+
+        // 第三种
+        return s.match(/[\w']+/g).map((item)=>{
+            return item.split("").reverse().join("");
+            //[d,f,f]    ffd
+        }).join(" ");
+};
+        console.log(reverseWords(str)) ;
+        </script>
+</body>
+</html>
