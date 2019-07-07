@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str = "00110011";
+    //找符合条件的字符串
+     function fn(str){
+        let  i = str.match(/^(0+|1+)/g)[0];   
+         //00
+        let j = (i[0]^1).toString().repeat(i.length);   //11
+        //^异或   相同为0，不同为1
+        let reg = new RegExp(`^(${i}${j})`);   //^0011
+        if(reg.test(str)){
+            return RegExp.$1;  //字母表达式第一个匹配的结果   这种写法一定要在match  test  之后用，一定要执行一次才能用
+        }else{
+            return "";.
+        }
+        
+     }   
+     function countBinarySubstrings(s) {
+        let res = [];
+        for(let i = 0;i<s.length-1;i++){
+            let r = fn(s.slice(i));
+            if(r!=""){
+                res.push(r);
+            }
+        }
+        return res.length;
+     };
+     console.log(countBinarySubstrings(str));
+    </script>
+</body>
+</html>
