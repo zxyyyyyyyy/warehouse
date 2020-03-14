@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //选择排序思想：从最开始出发寻找最小值，并把最小值放在第一位，
+        // 之后从第二位出发，找第二小值，放到该位置
+        
+    function fn(arr){
+        for(let i=0;i<=arr.length-1;i++){
+            let min=i; //记录最小下标
+            for(let j=i;j<=arr.length-1;j++){
+                if(arr[j]<arr[min]){
+                    min=j; //跟换最小下标
+                }
+            }
+            if(i!=min){
+                [arr[i],arr[min]]=[arr[min],arr[i]];
+            }
+        }
+        return arr;
+    }
+    console.log(fn([4,2,5,6,8,1,11,,9]))
+    </script>
+</body>
+</html>

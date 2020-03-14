@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    let str = "Let's take LeetCode contest ";
+    function reverseWords(s){
+        //第一种  分割合并
+        // let arr = s.split(" ");//[let's,take,leetcode]
+        // let res = arr.map((item)=>{
+        //     return item.split("").reverse().join("");
+        // })
+        // return res.join(" ");
+
+        //简化
+        //  return  s.split(" ").map((item)=>{
+        //     return item.split("").reverse().join("");
+        // }).join(" ");
+
+        //第二种  match 取出想要的  后面参数可以字符串可以正则表达式
+        // [let's,take,leetcode]
+        return s.match(/[\w']+/g).map((item)=>{
+            return item.split("").reverse().join("");
+        }).join(" ");
+
+    }
+    console.log(reverseWords(str));
+    </script>
+</body>
+</html>

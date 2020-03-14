@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //冒泡排序思想：从头找最大的数一直到最后，
+        // 放在队列最后，再从头找一直找到倒数第二个最大的，
+        // 依次放在倒数第二位
+    function fn(arr){
+        //到哪里结束
+        for(let i=arr.length-1;i>=0;i--){
+            //从哪里开始到哪里结束
+            for(let j=0;j<i;j++){
+                if(arr[j]>arr[j+1]){
+                    //两个数交换值的方法
+                    
+                    // 第一种
+                    // let temp=arr[j+1];
+                    // arr[j+1]=arr[j];
+                    // arr[j]=temp;
+
+                    // 第二种
+                    // [arr[j],arr[j+1]]=[arr[j+1],arr[j]];
+
+                    // 第三种
+                    // arr[j]=arr[j]+arr[j+1];
+                    // arr[j+1]=arr[j]-arr[j+1];
+                    // arr[j]=arr[j]-arr[j+1];
+
+                    // 第四种
+                    arr[j]=[arr[j+1],arr[j+1]=arr[j]][0];
+                }
+            }
+        }
+        return arr;
+    }
+    console.log(fn([3,15,14,11,7,8,1,9,2]))
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn(str){
+            // return str.split(" ").map((item)=>{
+            //     return item.split("").reverse().join("");
+            // }).join(" ");
+
+            return str.match(/[\w']+/g).map((item)=>{
+                return item.split("").reverse().join("");
+            }).join(" ");
+        }
+        let str="haha wuwuuwwuu ce cececcd"
+        console.log(fn(str))
+    </script>
+</body>
+</html>

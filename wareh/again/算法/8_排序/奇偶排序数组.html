@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function fn(arr){
+
+        arr.sort((a,b)=>a-b);
+        let r=[];
+        let odd=1;
+        let even=0;
+        arr.forEach((item) => {
+            if(item % 2==1){
+                r[odd]=item;
+                odd+=2;
+            }else{
+                r[even]=item;
+                even+=2;
+            }
+        });
+        return r;
+        
+//第二种
+//用选择排序，判断该位置下表和值是否是偶数，是则不换，
+//不是则向后找到第一个偶数，与该值进行跟换
+       
+    }
+    let arr=[3,5,6,6,6,8,9];
+    console.log(fn(arr));
+    </script>
+</body>
+</html>
