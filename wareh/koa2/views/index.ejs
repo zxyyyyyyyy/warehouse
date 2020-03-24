@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <!-- ejs 写法 <%=属性 %>
+    模板里数据是可变的
+    并不是在模板上写死的
+    用title变量代表了后端传送给我title -->
+    <!-- 传递字符串 -->
+    <h1> <%=title%> </h1> 
+    <!-- 传递数组 -->
+    <ul>
+        <%   
+            for(let i=0;i<list.length;i++){  
+        %>
+        <!-- 用的是模板代码，循环取数组中的元素，
+            大括号要把html代码包在里面 -->
+        <li>
+            <%=list[i].name%> -- <%=list[i].age%>
+        </li>
+        <%
+            }
+        %>
+    </ul>
+</body>
+</html>

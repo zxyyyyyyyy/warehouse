@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>登录页面</h1>
+    <form action="http://localhost:3000" method="post"> 
+        <!-- action作用是向后端请求的地址，method 是请求的方法 ，
+        如果method 打错的话，post就不会起作用，默认是get请求-->
+    <p >
+        <!-- label标签，行级元素，里面是输入框前面的属性名字，
+            用for与输入框的id相对应，
+        实现点击输入框前面的名字也可以在输入框里获取焦点 -->
+        <label for="username">用户名</label>
+        <input type="text " id="username" name="username">
+        <!-- 后端接收post请求的时候，比如说表单，都是通过name 属性接收的 -->
+    </p>
+    <p>
+        <label for="password">密码</label>
+        <input type="password" id="password" name="password">
+    </p>
+    <input type="submit" value="登录">
+    </form>
+</body>
+</html>

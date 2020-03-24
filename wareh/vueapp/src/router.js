@@ -10,6 +10,7 @@ import Photo from '@/views/photo.vue'
 import PhotoDetail from '@/views/photoDetail.vue'
 
 import Book from '@/views/book.vue'
+import Ajax from '@/views/Ajax.vue'
 
 
 Vue.use(Router)
@@ -49,6 +50,10 @@ export default new Router({
     {
       path:"/",
       redirect:"/movie",
+    },{
+      path:"/ajax",
+      name:"ajax",
+      component:Ajax 
     }
   
   ]
