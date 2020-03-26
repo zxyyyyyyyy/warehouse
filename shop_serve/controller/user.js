@@ -52,7 +52,8 @@ router.post('/loginUser',async (ctx)=>{
                 if(isMatch){
                     ctx.body ={
                         code:200,
-                        message:'登录成功'
+                        message:'登录成功',
+                        userInfo:result,  //把这条数据返回给前端
                     }
                 }else{
                     ctx.body={

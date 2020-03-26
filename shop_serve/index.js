@@ -2,7 +2,6 @@ const Koa = require("koa");
 const app = new Koa();
 
 
-
 // 解决跨域问题
 const cors = require('koa2-cors');
 app.use(cors({   //指定那些源头可以请求后端
@@ -16,12 +15,21 @@ app.use(bodyParser());
 
 //加载路由
 const Router = require('koa-router');
-let user = require ('./controller/user.js');
-
 let router = new Router();
+
+// 配置user路由
+let user = require ('./controller/user.js');
 router.use('/user',user.routes());  // '/user'对应的是controller下的user控制器
 // '/user'参数，与前端发过来的 'user/registUser' 里的user是一样的
 // 在user 控制器下面定义一个相应的方法registUser，表示注册用户
+
+// 配置product路由
+let product = require('./controller/product.js');
+router.use('/product',product.routes());
+
+//配置type路由
+let type = require('./controller/type.js');
+router.use('/type',type.routes());
 
 app.use(router.routes());
 app.use(router.allowedMethods());  

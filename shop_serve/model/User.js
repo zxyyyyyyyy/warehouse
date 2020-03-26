@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs"); //引入加盐加密
 // 创建用户集合（表）对应的模型，
 // 里面的每一个属性对应的是数据库里面的每一个key(键值)
 const userSchema = new Schema({
-  userId: Schema.Types.ObjectId, //生成一个唯一Id
+  userId: Schema.Types.ObjectId, //Types :生成一个唯一Id
   userName: { unique: true, type: String }, //有多个条件去配置的话，在对象里面
   // 名字是否唯一 unique:true
   password: String,
@@ -43,7 +43,7 @@ userSchema.methods = {
     // 比较输入密码和加盐加密过的密码是否相等
     comparePassword : (_password,password) =>{
         return new Promise((resolve,reject)=>{  //用Promise对象可以.then
-            console.log(_password,password);//第一个undefined ,
+            // console.log(_password,password);//第一个undefined ,
             bcrypt.compare(_password,password,(err,isMatch)=>{
                 if(!err) resolve(isMatch) //成功返回isMatch布尔值
                 else reject(err)
