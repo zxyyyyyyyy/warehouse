@@ -31,6 +31,10 @@ router.use('/product',product.routes());
 let type = require('./controller/type.js');
 router.use('/type',type.routes());
 
+// 配置cart路由
+let cart = require('./controller/cart.js');
+router.use('/cart',cart.routes());
+
 app.use(router.routes());
 app.use(router.allowedMethods());  
 //allowedMethods()配置什么请求就只能接收什么请求
